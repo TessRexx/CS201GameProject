@@ -10,8 +10,8 @@ public class PlayerScript : MonoBehaviour
     Collider2D playerCollider;
 
     // Variables
-    float playerSpeed = 3000;
-    float JumpSpeed = 20;
+    float playerSpeed = 2500;
+    float JumpSpeed = 18;
 
     void Start()
     {
@@ -38,10 +38,13 @@ public class PlayerScript : MonoBehaviour
     {
         // Flips player sprite based on movement
         bool playerHorizontalMove = Mathf.Abs(playerRB.velocity.y) > 0;
-        if (playerHorizontalMove)
+        if (Input.GetAxis("Horizontal") < 0)
         {
-            // Returns sign of velocity 
-            transform.localScale = new Vector3(Mathf.Sign(playerRB.velocity.x) * 1, 1, 1);
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        if ((Input.GetAxis("Horizontal") > 0))
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
         // Getting input and moving the character
@@ -55,17 +58,20 @@ public class PlayerScript : MonoBehaviour
     // Jump Method
     private void PlayerJump()
     {
-        bool IsTouchingGround = playerCollider.IsTouchingLayers(LayerMask.GetMask("Foreground"));
-
         if (Input.GetButtonDown("Jump"))
         {
+            bool IsTouchingGround = playerCollider.IsTouchingLayers(LayerMask.GetMask("Foreground"));
+
             if (IsTouchingGround)
             {
                 Vector2 JumpVelocity = new Vector2(0, JumpSpeed);
                 playerRB.velocity += JumpVelocity;
-                playerAnimator.SetBool("Jump", !IsTouchingGround);
             }
-            
+            playerAnimator.SetBool("Jump", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("Jump", false);
         }
     }
 
