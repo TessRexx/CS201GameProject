@@ -13,6 +13,9 @@ public class PlayerScript : MonoBehaviour
     float playerSpeed = 2500;
     float JumpSpeed = 18;
 
+    // Public to access it from the HUDScript class
+    [HideInInspector] public int KeyCollected = 0;
+
     void Start()
     {
         // Component References
@@ -75,6 +78,18 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-}
+    // Colection Method
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // If Key Collected
+        if (collision.gameObject.CompareTag("Key"))
+        {
+            // Add to key count
+            KeyCollected++;
+            // Destroy key object
+            Destroy(collision.gameObject);
+        }
 
+    }
+}
 
