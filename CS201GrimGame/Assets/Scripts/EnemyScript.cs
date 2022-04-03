@@ -5,41 +5,72 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     Rigidbody2D enemyRB;
-    float movementSpeed = 0.7f;
-    Vector3 positionX1 = new Vector3(16.3f, -4.46f, 0);
-    Vector3 positionX2 = new Vector3(19.6f, -4.46f, 0);
+    Animator enemyAnimator;
+    int health = 3;
+
+    // Patrol Variables
+    bool enemyPatrol = true;
+    float patrolSpeed = 30;
+
+    // Flip Variables
+    [SerializeField] Transform groundCheck;
+    bool enemyTurn;
+    [SerializeField] LayerMask Foreground;
+    [SerializeField] Collider2D enemyCollider;
 
     void Start()
     {
         enemyRB = GetComponent<Rigidbody2D>();
+        enemyPatrol = true;
+        //enemyAnimator.SetBool("Walk", true);
     }
     void Update()
     {
-        /*// If statement to move enemy right
-        if (transform.position.x > 16.3f)
+       if(enemyPatrol)
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            enemyRB.velocity = new Vector2(movementSpeed, 0);
+            // If enemyPatrol = true then call Patrol Function
+            Patrol();
         }
-        // If statement to move enemy left
-        if (transform.position.x >= 19.6f)
-        {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-            enemyRB.velocity = new Vector2(-movementSpeed, 0);
-        }*/
-
-        // Moves between each position but doesn't flip
-        transform.position = Vector3.Lerp(positionX1, positionX2, (Mathf.PingPong(Time.time * movementSpeed, 1.0f)));
-
       
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void FixedUpdate()
     {
-        if (collision.gameObject.CompareTag("Environment"))
+        // if statement while enemy is moving
+        if(enemyPatrol)
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            // Returns true if groundCheck layer contains ground, and false if not
+            enemyTurn = !Physics2D.OverlapCircle(groundCheck.position, 0.1f, Foreground);
         }
     }
 
+    public void TakeDamage(int damage)
+    {
+        enemyAnimator.SetTrigger("Hurt");
+        health -= damage;
+        Debug.Log("Damage Taken by Player!");
+    }
+
+    // Patrol Function to make character walk
+    void Patrol()
+    {
+        // Velocity to move character in right direction
+        enemyRB.velocity = new Vector2(patrolSpeed * Time.fixedDeltaTime, enemyRB.velocity.y);
+
+        if (enemyTurn || enemyCollider.IsTouchingLayers(Foreground))
+        {
+            // Flip character in left direction once end of platfrom reached or collider hits the wall
+            Flip();
+        }
+    }
+
+    // Flip Function
+    void Flip()
+    {
+        enemyPatrol = false;
+        // Multiply x scale by -1 to flip
+        transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+        patrolSpeed *= -1;
+        enemyPatrol = true;
+    }
 }
