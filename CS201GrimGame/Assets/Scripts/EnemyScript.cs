@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     Rigidbody2D enemyRB;
-    Animator enemyAnimator;
+    [SerializeField] Animator enemyAnimator;
     int health = 3;
 
     // Patrol Variables
@@ -31,6 +31,12 @@ public class EnemyScript : MonoBehaviour
             // If enemyPatrol = true then call Patrol Function
             Patrol();
         }
+
+       if(health < 0)
+        {
+            enemyAnimator.SetTrigger("Death");
+            Destroy(gameObject, 1.4f);
+        }
       
     }
 
@@ -48,7 +54,6 @@ public class EnemyScript : MonoBehaviour
     {
         enemyAnimator.SetTrigger("Hurt");
         health -= damage;
-        Debug.Log("Damage Taken by Player!");
     }
 
     // Patrol Function to make character walk

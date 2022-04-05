@@ -5,24 +5,31 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     float timeBetweenAttack;
-    [SerializeField] float startTimeBetweenAttack;
+    float startTimeBetweenAttack = 0.3f;
 
     [SerializeField] Transform AttackPosition;
     [SerializeField] LayerMask defineEnemies;
+    [SerializeField]  Animator playerAnimator;
     [SerializeField] float attackRange;
-    Animator playerAnimator;
-    [SerializeField] int damage;
+    int damage = 1;
 
     // Update is called once per frame
     void Update()
+    {
+        Attack();
+    }
+
+    private void Attack()
     {
         if (timeBetweenAttack <= 0)
         {
             // Able to attack
             if (Input.GetButtonDown("Fire1"))
             {
+                // Attack animation trigger
                 playerAnimator.SetTrigger("Attack");
 
+                // Damage to enemy
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(AttackPosition.position, attackRange, defineEnemies);
                 for (int i = 0; i < enemiesToDamage.Length; i++)
                 {
@@ -31,10 +38,10 @@ public class PlayerAttack : MonoBehaviour
 
                 timeBetweenAttack = startTimeBetweenAttack;
             }
-            else
-            {
-                timeBetweenAttack -= Time.deltaTime;
-            }
+        }
+        else
+        {
+            timeBetweenAttack -= Time.deltaTime;
         }
     }
 
