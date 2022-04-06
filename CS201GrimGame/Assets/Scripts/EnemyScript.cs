@@ -21,23 +21,22 @@ public class EnemyScript : MonoBehaviour
     void Start()
     {
         enemyRB = GetComponent<Rigidbody2D>();
+        enemyAnimator = GetComponent<Animator>();
         enemyPatrol = true;
-        //enemyAnimator.SetBool("Walk", true);
     }
     void Update()
     {
        if(enemyPatrol)
-        {
+       {
             // If enemyPatrol = true then call Patrol Function
             Patrol();
-        }
+       }
 
-       if(health < 0)
-        {
+        if (health < 0)
+       {
             enemyAnimator.SetTrigger("Death");
             Destroy(gameObject, 1.4f);
-        }
-      
+       }
     }
 
     private void FixedUpdate()
@@ -78,4 +77,6 @@ public class EnemyScript : MonoBehaviour
         patrolSpeed *= -1;
         enemyPatrol = true;
     }
+
+    
 }

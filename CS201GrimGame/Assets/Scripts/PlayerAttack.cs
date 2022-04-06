@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    float timeBetweenAttack;
-    float startTimeBetweenAttack = 0.3f;
+    float attackCooldown;
+    float startAttackCooldown = 0.3f;
 
     [SerializeField] Transform AttackPosition;
     [SerializeField] LayerMask defineEnemies;
@@ -21,7 +21,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Attack()
     {
-        if (timeBetweenAttack <= 0)
+        if (attackCooldown <= 0)
         {
             // Able to attack
             if (Input.GetButtonDown("Fire1"))
@@ -36,12 +36,12 @@ public class PlayerAttack : MonoBehaviour
                     enemiesToDamage[i].GetComponent<EnemyScript>().TakeDamage(damage);
                 }
 
-                timeBetweenAttack = startTimeBetweenAttack;
+                attackCooldown = startAttackCooldown;
             }
         }
         else
         {
-            timeBetweenAttack -= Time.deltaTime;
+            attackCooldown -= Time.deltaTime;
         }
     }
 

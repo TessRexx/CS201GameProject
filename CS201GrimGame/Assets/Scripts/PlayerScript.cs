@@ -12,6 +12,8 @@ public class PlayerScript : MonoBehaviour
     // Variables
     float playerSpeed = 2500;
     float JumpSpeed = 18;
+    int playerHealth = 3;
+
 
     // Public to access it from the HUDScript class
     [HideInInspector] public int KeyCollected = 0;
