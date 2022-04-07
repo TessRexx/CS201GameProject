@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    Rigidbody2D enemyRB;
+    public Rigidbody2D enemyRB;
     [SerializeField] Animator enemyAnimator;
     int health = 3;
 
     // Patrol Variables
-    bool enemyPatrol = true;
-    float patrolSpeed = 30;
+    public bool enemyPatrol = true;
+    public float patrolSpeed = 30;
 
     // Flip Variables
     [SerializeField] Transform groundCheck;
@@ -69,7 +69,7 @@ public class EnemyScript : MonoBehaviour
     }
 
     // Flip Function
-    void Flip()
+    public void Flip()
     {
         enemyPatrol = false;
         // Multiply x scale by -1 to flip
@@ -77,6 +77,4 @@ public class EnemyScript : MonoBehaviour
         patrolSpeed *= -1;
         enemyPatrol = true;
     }
-
-    
 }

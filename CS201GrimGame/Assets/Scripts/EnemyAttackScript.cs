@@ -5,76 +5,66 @@ using UnityEngine;
 public class EnemyAttackScript : MonoBehaviour
 {
     // Attack Variables
-    float attackCooldown = 1;
+    float cooldownTimer = 2;
     int damage = 1;
-    float range = -3.5f;
-
-    // Collider Parameters
-    float colliderDistance = -0.25f;
-    [SerializeField] BoxCollider2D boxCollider;
-
-    // Player Layer
-    [SerializeField] LayerMask playerLayer;
-    float cooldownTimer = Mathf.Infinity;
+    [SerializeField] float range = 3;
+    [SerializeField] float throwSpeed = 2;
+    float distanceToPlayer;
+    [SerializeField] Transform player, shootPosition;
+    bool canAttack = true;
+    [SerializeField] GameObject rockProjectile;
 
     // References
     [SerializeField]Animator enemyAnimator;
-    EnemyScript enemyPatrol;
     PlayerScript playerHealth;
-
+    EnemyScript enemyScript;
 
     // Start is called before the first frame update
     void Start()
     {
         enemyAnimator = GetComponent<Animator>();
-        enemyPatrol = GetComponentInParent<EnemyScript>();
+        enemyScript = GameObject.FindObjectOfType(typeof(EnemyScript)) as EnemyScript;
     }
 
     // Update is called once per frame
     void Update()
     {
-        cooldownTimer += Time.deltaTime;
-
-        if(PlayerInSight())
+        // Calculates distance between 2 game objects
+        distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        if(distanceToPlayer <= range)
         {
-            if (cooldownTimer >= attackCooldown)
+            if(player.position.x > transform.position.x && transform.localScale.x < 0 
+                || player.position.x < transform.position.x && transform.localScale.x > 0)
             {
-                // Reset timer to 0
-                cooldownTimer = 0;
-                enemyAnimator.SetTrigger("Attack");
+                enemyScript.Flip();
             }
+            enemyScript.enemyPatrol = false;
+            enemyScript.enemyRB.velocity = Vector2.zero;
+            if (canAttack)
+            {
+                StartCoroutine(Attack());
+            }           
         }
+        else
+        {
+            enemyScript.enemyPatrol = true;
+        }
+
     }   
 
-    private bool PlayerInSight()
+    IEnumerator Attack()
     {
-        // Determine if player in enemy sight
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance,
-            new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z),
-            0, Vector2.left, 0, playerLayer);
-
-        if (hit.collider != null)
-        {
-            playerHealth = hit.transform.GetComponent<PlayerScript>();
-        }
-
-        // Return true when not null, return false when is null
-        return hit.collider != null;
+        canAttack = false;
+        yield return new WaitForSeconds(cooldownTimer);
+        GameObject newRock = Instantiate(rockProjectile, shootPosition.position, Quaternion.identity);
+        newRock.GetComponent<Rigidbody2D>().velocity = new Vector2(throwSpeed * enemyScript.patrolSpeed * Time.fixedDeltaTime, 0);
+        enemyAnimator.SetTrigger("Attack");
+        canAttack = true;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance,
-            new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z));
-    }
 
    void DamagePlayer()
     {
-        // If player still in range, damage them
-        if(PlayerInSight())
-        {
-            //playerHealth.TakeDamage(damage);
-        }
+
     }
 }
