@@ -6,7 +6,7 @@ public class EnemyAttackScript : MonoBehaviour
 {
     // Attack Variables
     float cooldownTimer = 1.5f;
-    [SerializeField] float range = 3;
+    [SerializeField] float range = 4;
     float distanceToPlayer;
     [SerializeField] Transform player, throwPosition;
     bool canAttack = true;

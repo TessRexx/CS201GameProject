@@ -73,7 +73,7 @@ public class EnemyScript : MonoBehaviour
     {
         enemyPatrol = false;
         // Multiply x scale by -1 to flip
-        transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+        transform.Rotate(0, 180, 0);
         patrolSpeed *= -1;
         enemyPatrol = true;
     }
