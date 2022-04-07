@@ -4,28 +4,23 @@ using UnityEngine;
 
 public class RockProjectileScript : MonoBehaviour
 {
-    [SerializeField] float dieTime = 5, damage;
-    [SerializeField] GameObject dieEffect;
+    Rigidbody2D RockProjectileRB;
+    [SerializeField] float RockProjectileSpeed = 4.0f;
+
+    [SerializeField] float damage;
+
     void Start()
-    {
-        
+    {       
+        RockProjectileRB = GetComponent<Rigidbody2D>();
+        RockProjectileRB.velocity = transform.right * RockProjectileSpeed * Time.deltaTime;
     }
 
-    // Update is called once per frame
-    void Update()
+    /*private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Destroy(gameObject);
-    }
-
-    IEnumerator CountdownTime()
-    {
-        yield return new WaitForSeconds(dieTime);
-
-        Destroy(gameObject);
-    }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(collision.gameObject); // Destroy if player hit
+        }
+        Destroy(gameObject); // Destroy projectile
+    }*/
 }

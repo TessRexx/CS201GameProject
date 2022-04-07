@@ -5,12 +5,10 @@ using UnityEngine;
 public class EnemyAttackScript : MonoBehaviour
 {
     // Attack Variables
-    float cooldownTimer = 2;
-    int damage = 1;
+    float cooldownTimer = 1.5f;
     [SerializeField] float range = 3;
-    [SerializeField] float throwSpeed = 2;
     float distanceToPlayer;
-    [SerializeField] Transform player, shootPosition;
+    [SerializeField] Transform player, throwPosition;
     bool canAttack = true;
     [SerializeField] GameObject rockProjectile;
 
@@ -39,6 +37,7 @@ public class EnemyAttackScript : MonoBehaviour
                 enemyScript.Flip();
             }
             enemyScript.enemyPatrol = false;
+            enemyAnimator.SetBool("Idle", true);
             enemyScript.enemyRB.velocity = Vector2.zero;
             if (canAttack)
             {
@@ -56,9 +55,8 @@ public class EnemyAttackScript : MonoBehaviour
     {
         canAttack = false;
         yield return new WaitForSeconds(cooldownTimer);
-        GameObject newRock = Instantiate(rockProjectile, shootPosition.position, Quaternion.identity);
-        newRock.GetComponent<Rigidbody2D>().velocity = new Vector2(throwSpeed * enemyScript.patrolSpeed * Time.fixedDeltaTime, 0);
         enemyAnimator.SetTrigger("Attack");
+        Instantiate(rockProjectile, throwPosition.position, throwPosition.rotation);
         canAttack = true;
     }
 
