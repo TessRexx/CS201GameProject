@@ -29,6 +29,7 @@ public class EnemyScript : MonoBehaviour
        if(enemyPatrol)
        {
             // If enemyPatrol = true then call Patrol Function
+            enemyAnimator.SetBool("Walk", true);
             Patrol();
        }
 
@@ -72,7 +73,6 @@ public class EnemyScript : MonoBehaviour
     public void Flip()
     {
         enemyPatrol = false;
-        // Multiply x scale by -1 to flip
         transform.Rotate(0, 180, 0);
         patrolSpeed *= -1;
         enemyPatrol = true;

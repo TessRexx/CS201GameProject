@@ -18,21 +18,14 @@ public class RockProjectileScript : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            //Destroy(collision.gameObject); // Destroy if player hit
-        }
-        //if (collision.gameObject.CompareTag("Environment"))
-        //{
-        //    Destroy(collision.gameObject); // Destroy if player hites
-        //}
+        StartCoroutine(DestroyRock());
     }
 
-    //IEnumerator DestroyRock()
-    //{
-    //    yield return new WaitForSeconds(3);
-    //    Destroy(gameObject);
-    //}
+    IEnumerator DestroyRock()
+    {
+        yield return new WaitForSeconds(1);
+        Destroy(gameObject);
+    }
 
 
 

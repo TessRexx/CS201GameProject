@@ -27,18 +27,22 @@ public class EnemyAttackScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Calculates distance between 2 game objects
+        // Calculates distance between 2 game objects (player and enemy)
         distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
         if(distanceToPlayer <= range)
         {
-            if(player.position.x > transform.position.x && transform.localScale.x < 0 
-                || player.position.x < transform.position.x && transform.localScale.x > 0)
+            // if player is ahead of enemy while enemy faces left or if  player is behind enemy while enemy faces right then flip
+            if (player.position.x > transform.position.x && transform.rotation.y < 0
+                || player.position.x < transform.position.x && transform.rotation.y >= 0)
             {
                 enemyScript.Flip();
             }
+
             enemyScript.enemyPatrol = false;
-            enemyAnimator.SetBool("Idle", true);
             enemyScript.enemyRB.velocity = Vector2.zero;
+            enemyAnimator.SetBool("Idle", true);
+
             if (canAttack)
             {
                 StartCoroutine(Attack());

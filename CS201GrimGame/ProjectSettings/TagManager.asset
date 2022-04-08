@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Key
   - Environment
+  - Projectile
   layers:
   - Default
   - TransparentFX
