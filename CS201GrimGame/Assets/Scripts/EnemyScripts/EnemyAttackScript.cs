@@ -14,7 +14,6 @@ public class EnemyAttackScript : MonoBehaviour
 
     // References
     [SerializeField]Animator enemyAnimator;
-    PlayerScript playerHealth;
     EnemyScript enemyScript;
 
     // Start is called before the first frame update
@@ -61,10 +60,5 @@ public class EnemyAttackScript : MonoBehaviour
         enemyAnimator.SetTrigger("Attack");
         Instantiate(rockProjectile, throwPosition.position, throwPosition.rotation);
         canAttack = true;
-    }
-
-   void DamagePlayer()
-    {
-
     }
 }
