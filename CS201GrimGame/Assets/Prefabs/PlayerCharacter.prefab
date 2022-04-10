@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4326952608957452487}
   - component: {fileID: 4326952608957452486}
   - component: {fileID: 4326952608957452485}
+  - component: {fileID: 2750260433677126872}
   m_Layer: 9
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -139,7 +140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 270ac1a1b73fb0141bb444b5772bb4c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KeyCollected: 0
 --- !u!95 &4326952608957452486
 Animator:
   serializedVersion: 4
@@ -177,7 +177,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   playerAnimator: {fileID: 4326952608957452486}
-  attackRange: 0.41
+  attackRange: 0.4
+  damage: 1
+--- !u!114 &2750260433677126872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4326952608957452540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f8015a552a064418d072dc8435f1e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 3
 --- !u!1 &4326952611077936839
 GameObject:
   m_ObjectHideFlags: 0

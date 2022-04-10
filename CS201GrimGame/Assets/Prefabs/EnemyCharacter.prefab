@@ -176,10 +176,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc927386aa815f14184d6031710992bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyRB: {fileID: 0}
   enemyAnimator: {fileID: 5775672560843589408}
-  enemyPatrol: 1
-  patrolSpeed: 30
+  health: 3
+  EnemyPatrol: 1
+  PatrolSpeed: 30
   groundCheck: {fileID: 5775672559619516540}
   Foreground:
     serializedVersion: 2
