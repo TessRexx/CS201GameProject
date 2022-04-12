@@ -44,6 +44,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth + value, 0, startingHealth);
     }
 
+    // Restart function triggered when player loses all health
     IEnumerator Restart()
     {
         yield return new WaitForSeconds(restartTimer);

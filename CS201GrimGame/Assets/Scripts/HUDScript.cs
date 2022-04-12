@@ -7,8 +7,8 @@ using TMPro;
 public class HUDScript : MonoBehaviour
 {
     // Key Variables
-    [SerializeField] TextMeshProUGUI KeyText;
-    [SerializeField] PlayerScript player;
+    [SerializeField] KeyCollectibleScript keyCollectible;
+    [SerializeField] public Image keyCollected;
 
     // Healthbar Variables
     [SerializeField] PlayerHealth playerHealth;
@@ -20,14 +20,13 @@ public class HUDScript : MonoBehaviour
     {
         // Setting full health bar when starting game
         totalHealth.fillAmount = playerHealth.currentHealth / fillAmount;
+
+        keyCollected.fillAmount = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Takes variable for player and adds to HUD Text
-        KeyText.text = player.KeyCollected.ToString();
-
         // Updating health bar fill amount
         currentHealth.fillAmount = playerHealth.currentHealth / fillAmount;
     }
