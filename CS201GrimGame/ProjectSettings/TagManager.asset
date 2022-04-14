@@ -50,3 +50,6 @@ TagManager:
   - name: ForegroundCharacter
     uniqueID: 3416517111
     locked: 0
+  - name: DecorativeForeground
+    uniqueID: 387009401
+    locked: 0

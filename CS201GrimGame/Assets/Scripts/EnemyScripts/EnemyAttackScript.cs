@@ -6,16 +6,16 @@ using UnityEngine;
 public class EnemyAttackScript : MonoBehaviour
 {
     // References
-    [SerializeField]Animator enemyAnimator;
+    [SerializeField] Animator enemyAnimator;
     EnemyBehaviourScript enemyScript;
     [SerializeField] GameObject rockProjectile;
     [SerializeField] Transform player, throwPosition;
 
     // Variables
-    public float cooldownTimer = 1f;
     [SerializeField] float range = 4;
+    public float cooldownTimer = 1;
     float distanceToPlayer;
-    public bool canAttack;
+    public bool canAttack = true;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,7 @@ public class EnemyAttackScript : MonoBehaviour
         // Component References
         enemyAnimator = GetComponent<Animator>();
         enemyScript = GameObject.FindObjectOfType(typeof(EnemyBehaviourScript)) as EnemyBehaviourScript;
-        
+
         // Set to true on launch
         canAttack = true;
     }
@@ -31,23 +31,28 @@ public class EnemyAttackScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Calculates distance between 2 game objects (player and enemy)
+        // Calculates distance between 2 game objects (enemy and player)
         distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
         // If player in range and view of enemy, call attack method, else continue patrolling 
         if (distanceToPlayer <= range)
         {
+            Debug.Log("Player in range");
             if (player.position.x < transform.position.x && transform.rotation.y < 0
                 || player.position.x > transform.position.x && transform.rotation.y >= 0)
+
             {
+                Debug.Log("Player in view");
                 if (canAttack)
                 {
+                    Debug.Log("can attack");
                     StartCoroutine(Attack());
                 }
             }
         }
         else
         {
+            Debug.Log("Player not in range");
             enemyScript.EnemyPatrol = true;
         }
     }
