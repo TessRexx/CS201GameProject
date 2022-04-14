@@ -9,18 +9,18 @@ public class EnemyAttackScript : MonoBehaviour
     [SerializeField] float range = 4;
     float distanceToPlayer;
     [SerializeField] Transform player, throwPosition;
-    bool canAttack = true;
+    public bool canAttack = true;
     [SerializeField] GameObject rockProjectile;
 
     // References
     [SerializeField]Animator enemyAnimator;
-    EnemyScript enemyScript;
+    EnemyBehaviourScript enemyScript;
 
     // Start is called before the first frame update
     void Start()
     {
         enemyAnimator = GetComponent<Animator>();
-        enemyScript = GameObject.FindObjectOfType(typeof(EnemyScript)) as EnemyScript;
+        enemyScript = GameObject.FindObjectOfType(typeof(EnemyBehaviourScript)) as EnemyBehaviourScript;
     }
 
     // Update is called once per frame
@@ -29,29 +29,24 @@ public class EnemyAttackScript : MonoBehaviour
         // Calculates distance between 2 game objects (player and enemy)
         distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-        if(distanceToPlayer <= range)
+        if (distanceToPlayer <= range)
         {
-            // if player is ahead of enemy while enemy faces left or if  player is behind enemy while enemy faces right then flip
-            if (player.position.x > transform.position.x && transform.rotation.y < 0
-                || player.position.x < transform.position.x && transform.rotation.y >= 0)
+            if (player.position.x < transform.position.x && transform.rotation.y < 0
+                || player.position.x > transform.position.x && transform.rotation.y >= 0)
             {
-                enemyScript.Flip();
+                enemyScript.enemyRB.velocity = Vector2.zero;
+
+                if (canAttack)
+                {
+                    StartCoroutine(Attack());
+                }
             }
-
-            enemyScript.EnemyPatrol = false;
-            enemyScript.enemyRB.velocity = Vector2.zero;
-
-            if (canAttack)
-            {
-                StartCoroutine(Attack());
-            }           
         }
         else
         {
             enemyScript.EnemyPatrol = true;
         }
-
-    }   
+    }
 
     IEnumerator Attack()
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyScript : MonoBehaviour
+public class EnemyBehaviourScript : MonoBehaviour
 {
     public Rigidbody2D enemyRB { get; private set; }
     [SerializeField] Animator enemyAnimator;
@@ -47,15 +47,12 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(int damage)
     {  
         health -= damage;
+        enemyAnimator.SetTrigger("Hurt");
 
-        if (health > 0)
-        {
-            enemyAnimator.SetTrigger("Hurt");
-        }
-        else
+        if (health <= 0)
         {
             enemyAnimator.SetTrigger("Death");
-            Destroy(gameObject, 1.4f);
+            Destroy(gameObject, 1.2f);   
         }
     }
 

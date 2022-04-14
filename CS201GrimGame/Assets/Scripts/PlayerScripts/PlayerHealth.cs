@@ -33,7 +33,7 @@ public class PlayerHealth : MonoBehaviour
         {
             playerAnimator.SetTrigger("Death");
             // Disable movement once player dead
-            GetComponent<PlayerScript>().enabled = false;
+            GetComponent<PlayerBehaviourScript>().enabled = false;
             StartCoroutine(Restart());
             
         }

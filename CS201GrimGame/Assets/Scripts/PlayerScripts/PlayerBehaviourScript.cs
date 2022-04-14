@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerScript : MonoBehaviour
+public class PlayerBehaviourScript : MonoBehaviour
 {
     // Component References
     Rigidbody2D playerRB;
@@ -67,12 +67,9 @@ public class PlayerScript : MonoBehaviour
                 Vector2 JumpVelocity = new Vector2(0, JumpSpeed);
                 playerRB.velocity += JumpVelocity;
             }
-            playerAnimator.SetBool("Jump", true);
-        }
-        else
-        {
-            playerAnimator.SetBool("Jump", false);
+            playerAnimator.SetTrigger("Jump");
         }
     }
+
 }
 

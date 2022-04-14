@@ -35,7 +35,4 @@ public class RockProjectileScript : MonoBehaviour
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
-
-
-
 }
