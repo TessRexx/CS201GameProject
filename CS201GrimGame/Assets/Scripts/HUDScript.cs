@@ -1,26 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
+// THIS SCRIPT RELAYS INFO TO PLAYER SUCH AS HEALTH AND ITEMS TO BE COLLECTED
+
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class HUDScript : MonoBehaviour
 {
-    // Key Variables
+    // Key References & Variables
     [SerializeField] KeyCollectibleScript keyCollectible;
     [SerializeField] public Image keyCollected;
 
-    // Healthbar Variables
+    // Healthbar References & Variables
     [SerializeField] PlayerHealth playerHealth;
     [SerializeField] Image totalHealth;
     [SerializeField] Image currentHealth;
     int fillAmount = 3;
 
+    // Start is called before the first frame update
     void Start()
     {
-        // Setting full health bar when starting game
+        // Setting full health bar on launch
         totalHealth.fillAmount = playerHealth.currentHealth / fillAmount;
-
+        // Setting keys to 0 on launch
         keyCollected.fillAmount = 0;
     }
 

@@ -1,16 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+// THIS SCRIPT IS USED FOR COLLECTING KEYS IN GAME NEED FOR BOSS LEVEL ACCESS
+
 using UnityEngine;
 
 public class KeyCollectibleScript : MonoBehaviour
 {
-
-    // Public to access it from the HUDScript class
-    [HideInInspector] public int KeyAmount = 0;
+    // References & Variables
     [SerializeField] HUDScript hud;
+    [HideInInspector] public int KeyAmount = 0;
 
-
-    // Colection Method
+    // Collection Method
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // If Key Collected

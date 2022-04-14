@@ -1,11 +1,15 @@
+// THIS SCRIPT IS USED FOR THE HEART AND APPLE COLLECTIBLES IN GAME TO RESTORE THE PLAYERS HEALTH
+
 using UnityEngine;
+
 
 public class HealthCollectibleScript : MonoBehaviour
 {
-    // Variables & References
-    [SerializeField] float healthValue;
+    // References & Variables
     [SerializeField] PlayerHealth playerHealth;
-    
+    [SerializeField] float healthValue;
+
+    // Collect Health on Collision Method
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Checking is player is touching the object and health isn't already full

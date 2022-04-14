@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+// THIS SCRIPT CONTAINS PLAYER MOVEMENT FROM USER INPUT
+
 using UnityEngine;
 
 public class PlayerBehaviourScript : MonoBehaviour
 {
-    // Component References
+    // References
     Rigidbody2D playerRB;
     Animator playerAnimator;
     Collider2D playerCollider;
@@ -13,6 +13,7 @@ public class PlayerBehaviourScript : MonoBehaviour
     float playerSpeed = 2500;
     float JumpSpeed = 18;
 
+    // Start is called before the first frame update
     void Start()
     {
         // Component References
@@ -21,6 +22,7 @@ public class PlayerBehaviourScript : MonoBehaviour
         playerCollider = GetComponent<Collider2D>();
     }
 
+    // Update is called once per frame
     void Update()
     {
         bool playerHorizontalMove = PlayerMovement();
@@ -28,15 +30,17 @@ public class PlayerBehaviourScript : MonoBehaviour
         PlayerJump();
     }
 
+    // Player Walk Animation Method
     private void AnimationChange(bool playerHorizontalMove)
     {
         // Changing the animator controller variable to play different animations
         playerAnimator.SetBool("Walk", playerHorizontalMove);
     }
 
+    // Player Movement Method
     private bool PlayerMovement()
     {
-        // Flips player sprite based on movement
+        // Flips player based on movement
         bool playerHorizontalMove = Mathf.Abs(playerRB.velocity.y) > 0;
         if (Input.GetAxis("Horizontal") < 0)
         {
@@ -55,13 +59,14 @@ public class PlayerBehaviourScript : MonoBehaviour
         return playerHorizontalMove;
     }
 
-    // Jump Method
+    // Player Jump Method
     private void PlayerJump()
     {
+        // If user taps space bar
         if (Input.GetButtonDown("Jump"))
         {
+            // Determine if player is touching ground, if true then can jump
             bool IsTouchingGround = playerCollider.IsTouchingLayers(LayerMask.GetMask("Foreground"));
-
             if (IsTouchingGround)
             {
                 Vector2 JumpVelocity = new Vector2(0, JumpSpeed);
@@ -70,6 +75,5 @@ public class PlayerBehaviourScript : MonoBehaviour
             playerAnimator.SetTrigger("Jump");
         }
     }
-
 }
 

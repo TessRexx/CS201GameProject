@@ -1,52 +1,66 @@
+// THIS SCRIPT CONTAINS PLAYER HEALTH, TAKING DAMAGE, DEATH AND GAME RESTART
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    // Variables & References
+    // Health References & Variables
+    Animator playerAnimator;
     [SerializeField] public float startingHealth;
     public float currentHealth { get; private set; }
-    Animator playerAnimator, transitionAnimator;
+
+    // Restart References & Variables
+    Animator transitionAnimator;
     float restartTimer = 2;
 
+    // Start is called before the first frame update
     void Start()
     {
-        currentHealth = startingHealth;
+        // Component References
         playerAnimator = GetComponent<Animator>();
         transitionAnimator = GetComponent<Animator>();
+
+        // Setting to full health on launch
+        currentHealth = startingHealth;
     }
 
-    // Function to effect health based on damage
+    // Player Take Damage Method
     public void TakeDamage(float damageInflicted)
     {
-        // Safe guard to ensure doesn't go below 0 or above starting health
+        // Reduces health with safe guard to ensure doesn't go below 0 or above starting health
         currentHealth = Mathf.Clamp(currentHealth - damageInflicted, 0, startingHealth);
-
-        // If player still has health
-        if(currentHealth > 0)
+        playerAnimator.SetTrigger("Hurt");
+        
+        // If no health remaining, call die method
+        if(currentHealth <= 0)
         {
-            playerAnimator.SetTrigger("Hurt");
-        }
-        else
-        {
-            playerAnimator.SetTrigger("Death");
-            // Disable movement once player dead
-            GetComponent<PlayerBehaviourScript>().enabled = false;
-            StartCoroutine(Restart());
-            
+            Die();
         }
     }
 
+    // Player Death Method
+    void Die()
+    {
+        playerAnimator.SetTrigger("Death");
+        // Disable movement once player dead
+        GetComponent<PlayerBehaviourScript>().enabled = false;
+        // Call level restart function
+        StartCoroutine(Restart());
+    }
+
+    // Player Add Health Method
     public void AddHealth(float value)
     {
+        // Adds to health when called in health collectible script
         currentHealth = Mathf.Clamp(currentHealth + value, 0, startingHealth);
     }
 
-    // Restart function triggered when player loses all health
+    // Level Restart Method
     IEnumerator Restart()
     {
+        // Wait for 2 seconds and then fadeout
         yield return new WaitForSeconds(restartTimer);
         transitionAnimator.SetTrigger("Crossfade");
         // Returns name of current scene and loads it

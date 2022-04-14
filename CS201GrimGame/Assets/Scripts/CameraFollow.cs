@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+// THIS SCRIPT IS USED TO HAVE THE CAMERA VIEW FOLLOW THE PLAYER'S MOVEMENT
+
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
+    // Variables
     [SerializeField] Transform Player;
-
     Vector3 cameraOffset;
     [SerializeField] float CameraSmooth = 75f;
 

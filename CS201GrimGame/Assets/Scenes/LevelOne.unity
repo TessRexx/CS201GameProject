@@ -10415,10 +10415,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
-    - target: {fileID: 4326952611077936838, guid: db7ccab16860e1048a65200d438ad425, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.08
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db7ccab16860e1048a65200d438ad425, type: 3}
 --- !u!1001 &5775672559552728989
@@ -10428,18 +10424,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5775672560155693065, guid: b060472ba60b9764cb9305ad46ca538c, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 31035425}
-    - target: {fileID: 5775672560843589411, guid: b060472ba60b9764cb9305ad46ca538c, type: 3}
-      propertyPath: m_Size.y
-      value: 0.07231331
-      objectReference: {fileID: 0}
-    - target: {fileID: 5775672560843589411, guid: b060472ba60b9764cb9305ad46ca538c, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.55
-      objectReference: {fileID: 0}
     - target: {fileID: 5775672560843589414, guid: b060472ba60b9764cb9305ad46ca538c, type: 3}
       propertyPath: m_RootOrder
       value: 8

@@ -177,6 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAnimator: {fileID: 5775672560843589408}
+  attack: {fileID: 5775672560155693065}
   health: 3
   EnemyPatrol: 1
   PatrolSpeed: 30
@@ -198,7 +199,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08499336, y: -0.0557307}
+  m_Offset: {x: 0.08499336, y: -0.55}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -209,7 +210,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6357994, y: 1.0014613}
+  m_Size: {x: 0.6357994, y: 0.07231331}
   m_EdgeRadius: 0
 --- !u!70 &5775672560843589410
 CapsuleCollider2D:
@@ -239,9 +240,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86d738fcb4adba844b441c7e10310dd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownTimer: 1
   range: 4
-  player: {fileID: 0}
+  player: {fileID: 4326952608957452482, guid: db7ccab16860e1048a65200d438ad425, type: 3}
   throwPosition: {fileID: 5775672561124980781}
+  canAttack: 0
   rockProjectile: {fileID: 1127130619046469768, guid: 202258c540c32db40a68ef5846ed679c, type: 3}
   enemyAnimator: {fileID: 5775672560843589408}
 --- !u!1 &5775672561124980786
