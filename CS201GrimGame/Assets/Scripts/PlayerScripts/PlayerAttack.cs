@@ -11,15 +11,23 @@ public class PlayerAttack : MonoBehaviour
     // Variables
     [SerializeField] float attackRange;
     [SerializeField] int damage;
+    float attackRate = 1.5f;
+    float cooldownRate = 0f;
 
     // Update is called once per frame
     void Update()
     {
-        // If user left clicks, call Attack method
-        if (Input.GetButtonDown("Fire1"))
+        // If cooldown time is at 0 then can attack
+        if(Time.time >= cooldownRate)
         {
-            Attack();
-        }
+            // If user left clicks, call Attack method
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Attack();
+                // Add attackRate to cooldownRate to give time before next attack
+                cooldownRate = Time.time + attackRate;
+            }
+        }  
     }
 
     // Player Attack Method
@@ -27,13 +35,13 @@ public class PlayerAttack : MonoBehaviour
     {
         // Attack animation trigger
         playerAnimator.SetTrigger("Attack");
-        FindObjectOfType<AudioManager>().PlaySound("PlayerAttack"); // Trigger Sound
 
         // Define attack range
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(AttackPosition.position, attackRange, defineEnemies);
         // If player lands an attack on enemy, calls damage function from enemy behaviour script
         for (int i = 0; i < enemiesToDamage.Length; i++)
         {
+            FindObjectOfType<AudioManager>().PlaySound("PlayerAttack"); // Trigger Sound
             enemiesToDamage[i].GetComponent<EnemyBehaviourScript>().TakeDamage(damage);
         }
     }

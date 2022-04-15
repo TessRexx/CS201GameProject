@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 484db3315236f004a9b88ebd26590c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthValue: 0.5
   playerHealth: {fileID: 0}
+  healthValue: 0.5
 --- !u!70 &7421746214566340592
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

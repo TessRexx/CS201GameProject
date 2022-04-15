@@ -7,13 +7,13 @@ public class EnemyBehaviourScript : MonoBehaviour
     // References
     public Rigidbody2D enemyRB { get; private set; }
     [SerializeField] Animator enemyAnimator;
-    [SerializeField] EnemyAttackScript attack;
+    EnemyAttackScript enemyAttack;
 
     // Health Variables
     [SerializeField] int health;
 
     // Patrol Variables
-    public bool EnemyPatrol;
+    public bool EnemyPatrol = true;
     public float PatrolSpeed;
 
     // Flip Variables & References
@@ -28,9 +28,7 @@ public class EnemyBehaviourScript : MonoBehaviour
         // Component References
         enemyRB = GetComponent<Rigidbody2D>();
         enemyAnimator = GetComponent<Animator>();
-
-        // Set true on launch
-        EnemyPatrol = true;
+        enemyAttack = GetComponent<EnemyAttackScript>();
     }
 
     // Update is called once per frame
@@ -41,6 +39,14 @@ public class EnemyBehaviourScript : MonoBehaviour
         {
             enemyAnimator.SetBool("Walk", true);
             Patrol();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        // if statement while enemy is moving
+        if (EnemyPatrol)
+        {
             // Returns true if groundCheck layer contains ground, and false if not
             enemyTurn = !Physics2D.OverlapCircle(groundCheck.position, 0.1f, Foreground);
         }
@@ -50,7 +56,7 @@ public class EnemyBehaviourScript : MonoBehaviour
     public void TakeDamage(int damage)
     {
         // Stops from attacking when taking damage
-        attack.canAttack = false;
+        enemyAttack.canAttack = false;
         // Reduces health
         health -= damage;
         enemyAnimator.SetTrigger("Hurt");
@@ -60,6 +66,10 @@ public class EnemyBehaviourScript : MonoBehaviour
         {
             Die();
         }
+        else
+        {
+            enemyAttack.canAttack = true;
+        }
     }
 
     // Enemy Death Method
@@ -67,7 +77,7 @@ public class EnemyBehaviourScript : MonoBehaviour
     {
         enemyAnimator.SetTrigger("Death");
         // Stops enemy from moving and attacking when dead
-        EnemyPatrol = false;
+        enemyRB.velocity = Vector2.zero;
         GetComponent<EnemyAttackScript>().enabled = false;
         // Destroys enemy object
         Destroy(gameObject, 1.2f);

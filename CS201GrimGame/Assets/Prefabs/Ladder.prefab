@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7117373143072796484}
   m_Layer: 10
   m_Name: Ladder
-  m_TagString: Untagged
+  m_TagString: Ladder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +98,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0061383247, y: 0.044632435}
+  m_Offset: {x: -0.009277344, y: 0.024857402}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -109,5 +109,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7959716, y: 5.713335}
+  m_Size: {x: 1.1279616, y: 5.673785}
   m_EdgeRadius: 0

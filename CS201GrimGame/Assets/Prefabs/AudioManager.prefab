@@ -45,15 +45,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
+  - clip: {fileID: 8300000, guid: 4c4c69f7fc761a247992ad60dd8cfc69, type: 3}
+    name: ThemeSong
+    loop: 1
+    volume: 0.2
+    audioMixer: {fileID: 7974459728462157597, guid: 3f8f9291cd90f18458cc95a3960136f6, type: 2}
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: c16107810892e624dbb5c571d1f3da10, type: 3}
+    name: HealthCollected
+    loop: 0
+    volume: 0.3
+    audioMixer: {fileID: 3324576406284355220, guid: 3f8f9291cd90f18458cc95a3960136f6, type: 2}
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 406f8b62d8063274e90e6c15a8e3ab61, type: 3}
+    name: KeyCollected
+    loop: 0
+    volume: 0.3
+    audioMixer: {fileID: 3324576406284355220, guid: 3f8f9291cd90f18458cc95a3960136f6, type: 2}
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 602514f097bec8f43b6c11806ba1b85c, type: 3}
+    name: PlayerAttack
+    loop: 0
+    volume: 0.3
+    audioMixer: {fileID: 3324576406284355220, guid: 3f8f9291cd90f18458cc95a3960136f6, type: 2}
+    source: {fileID: 0}
   - clip: {fileID: 8300000, guid: 9e1a1122bbf69cb4c8423b4e6cea37bf, type: 3}
     name: PlayerHurt
     loop: 0
     volume: 1
     audioMixer: {fileID: 3324576406284355220, guid: 3f8f9291cd90f18458cc95a3960136f6, type: 2}
     source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: 4c4c69f7fc761a247992ad60dd8cfc69, type: 3}
-    name: ThemeSong
-    loop: 1
+  - clip: {fileID: 8300000, guid: d3c5bf50621b7b749acf45e07cfe7752, type: 3}
+    name: EnemyHurt
+    loop: 0
     volume: 0.3
-    audioMixer: {fileID: 7974459728462157597, guid: 3f8f9291cd90f18458cc95a3960136f6, type: 2}
+    audioMixer: {fileID: 3324576406284355220, guid: 3f8f9291cd90f18458cc95a3960136f6, type: 2}
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: eaa56eac474a761418e115e002a97256, type: 3}
+    name: EnemyAttack
+    loop: 0
+    volume: 0.3
+    audioMixer: {fileID: 3324576406284355220, guid: 3f8f9291cd90f18458cc95a3960136f6, type: 2}
     source: {fileID: 0}
