@@ -13,6 +13,12 @@ public class PlayerBehaviourScript : MonoBehaviour
     float playerSpeed = 2500;
     float JumpSpeed = 18;
 
+    // Ladder Variables
+    float inputVertical;
+    float climbSpeed = 8f;
+    bool isClimbing;
+    bool isLadder;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,9 +31,32 @@ public class PlayerBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool playerHorizontalMove = PlayerMovement();
+        bool playerHorizontalMove = PlayerHorizontalMovement();
         AnimationChange(playerHorizontalMove);
         PlayerJump();
+
+        // Input by W or S
+        inputVertical = Input.GetAxis("Vertical");
+        // If next to ladder and key pressed, able to climb
+        if(isLadder && Mathf.Abs(inputVertical) > 0f)
+        {
+            isClimbing = true;
+        }
+    }
+
+    // Fixed Update Method (Jumping Physics)
+    private void FixedUpdate()
+    {
+        // If player climbing, then remove gravity and apply vertical movement, else keep gravity scale
+        if (isClimbing)
+        {
+            playerRB.gravityScale = 0f;
+            playerRB.velocity = new Vector2(playerRB.velocity.x, inputVertical * climbSpeed);
+        }
+        else
+        {
+            playerRB.gravityScale = 5f;
+        }
     }
 
     // Player Walk Animation Method
@@ -38,7 +67,7 @@ public class PlayerBehaviourScript : MonoBehaviour
     }
 
     // Player Movement Method
-    private bool PlayerMovement()
+    private bool PlayerHorizontalMovement()
     {
         // Flips player based on movement
         bool playerHorizontalMove = Mathf.Abs(playerRB.velocity.y) > 0;
@@ -73,6 +102,27 @@ public class PlayerBehaviourScript : MonoBehaviour
                 playerRB.velocity += JumpVelocity;
             }
             playerAnimator.SetTrigger("Jump");
+        }
+    }
+
+    // Check If Ladder Method
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // If object tag is Ladder, it's a ladder
+        if(collision.CompareTag("Ladder"))
+        {
+            isLadder = true;
+        }
+    }
+
+    // Check If Exit Ladder Method
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // If object tag is Ladder, leaving ladder and no longer climbing
+        if (collision.CompareTag("Ladder"))
+        {
+            isLadder = false;
+            isClimbing = false;
         }
     }
 }
