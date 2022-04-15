@@ -1,6 +1,5 @@
 // THIS SCRIPT IS USED FOR ENEMY RANGED ATTACKS
 
-using System.Collections;
 using UnityEngine;
 
 public class EnemyAttackScript : MonoBehaviour

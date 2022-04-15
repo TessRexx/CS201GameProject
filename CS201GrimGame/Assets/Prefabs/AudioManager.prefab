@@ -87,3 +87,9 @@ MonoBehaviour:
     volume: 0.3
     audioMixer: {fileID: 3324576406284355220, guid: 3f8f9291cd90f18458cc95a3960136f6, type: 2}
     source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 07b5146c870d2d444842edfb39c87792, type: 3}
+    name: UnlockNextLevel
+    loop: 0
+    volume: 0.3
+    audioMixer: {fileID: 3324576406284355220, guid: 3f8f9291cd90f18458cc95a3960136f6, type: 2}
+    source: {fileID: 0}

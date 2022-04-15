@@ -1,5 +1,6 @@
 // THIS SCRIPT CONTAINS ENEMY MOVEMENT FOR PATROLLING, TAKING DAMAGE, AND DYING
 
+using System.Collections;
 using UnityEngine;
 
 public class EnemyBehaviourScript : MonoBehaviour
@@ -80,7 +81,15 @@ public class EnemyBehaviourScript : MonoBehaviour
         enemyRB.velocity = Vector2.zero;
         EnemyPatrol = false;
         // Destroys enemy object
-        Destroy(gameObject, 1.2f);
+        StartCoroutine(DestroyEnemy());
+    }
+
+    // Destroy Rock Object Method
+    IEnumerator DestroyEnemy()
+    {
+        // After 1 second, the enemy will be destroyed
+        yield return new WaitForSeconds(1.2f);
+        gameObject.SetActive(false);
     }
 
     // Enemy Patrol Method
