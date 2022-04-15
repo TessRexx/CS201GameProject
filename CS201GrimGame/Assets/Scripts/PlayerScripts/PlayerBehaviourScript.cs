@@ -10,7 +10,7 @@ public class PlayerBehaviourScript : MonoBehaviour
     Collider2D playerCollider;
 
     // Variables
-    float playerSpeed = 2500;
+    float playerSpeed = 350;
     float JumpSpeed = 18;
 
     // Ladder Variables
@@ -81,7 +81,7 @@ public class PlayerBehaviourScript : MonoBehaviour
         }
 
         // Getting input and moving the character
-        float controlThrow = Input.GetAxis("Horizontal") * Time.deltaTime;
+        float controlThrow = Input.GetAxis("Horizontal") * Time.fixedDeltaTime;
         Vector2 playerVelocity = new Vector2(controlThrow * playerSpeed, playerRB.velocity.y); // Velocity is 2D vector
         playerRB.velocity = playerVelocity;
 
