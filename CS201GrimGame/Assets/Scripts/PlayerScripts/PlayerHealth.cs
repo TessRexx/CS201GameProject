@@ -31,8 +31,8 @@ public class PlayerHealth : MonoBehaviour
     {
         // Reduces health with safe guard to ensure doesn't go below 0 or above starting health
         currentHealth = Mathf.Clamp(currentHealth - damageInflicted, 0, startingHealth);
-        playerAnimator.SetTrigger("Hurt");
-        FindObjectOfType<AudioManager>().PlaySound("PlayerHurt");
+        playerAnimator.SetTrigger("Hurt"); // Trigger Animation
+        FindObjectOfType<AudioManager>().PlaySound("PlayerHurt"); // Trigger Sound
         
         // If no health remaining, call die method
         if(currentHealth <= 0)

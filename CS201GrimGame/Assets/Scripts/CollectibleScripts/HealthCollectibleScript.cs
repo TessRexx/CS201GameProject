@@ -17,6 +17,7 @@ public class HealthCollectibleScript : MonoBehaviour
         {
             // Add corresponding value to health bar
             collision.GetComponent<PlayerHealth>().AddHealth(healthValue);
+            FindObjectOfType<AudioManager>().PlaySound("HealthCollected"); // Trigger Sound
             // Set object to inactive so it can't be used again
             gameObject.SetActive(false);
         }

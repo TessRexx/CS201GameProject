@@ -27,6 +27,7 @@ public class PlayerAttack : MonoBehaviour
     {
         // Attack animation trigger
         playerAnimator.SetTrigger("Attack");
+        FindObjectOfType<AudioManager>().PlaySound("PlayerAttack"); // Trigger Sound
 
         // Define attack range
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(AttackPosition.position, attackRange, defineEnemies);

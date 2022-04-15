@@ -18,6 +18,7 @@ public class KeyCollectibleScript : MonoBehaviour
             KeyAmount++;
             // Add corresponding value to health bar
             hud.keyCollected.fillAmount = 1;
+            FindObjectOfType<AudioManager>().PlaySound("KeyCollected"); // Trigger Sound
             // Set object to inactive so it can't be taken again
             gameObject.SetActive(false);
         }

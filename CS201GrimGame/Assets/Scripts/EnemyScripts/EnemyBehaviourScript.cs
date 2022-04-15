@@ -54,7 +54,7 @@ public class EnemyBehaviourScript : MonoBehaviour
         // Reduces health
         health -= damage;
         enemyAnimator.SetTrigger("Hurt");
-
+        FindObjectOfType<AudioManager>().PlaySound("EnemyHurt"); // Trigger Sound
         // If no health left, call death method
         if (health <= 0)
         {

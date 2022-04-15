@@ -24,6 +24,7 @@ public class RockProjectileScript : MonoBehaviour
     // Rock Collsion Method
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        FindObjectOfType<AudioManager>().PlaySound("EnemyAttack"); // Trigger Sound
         // When rock collides with player or environment, call destroy method
         StartCoroutine(DestroyRock());
     }
