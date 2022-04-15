@@ -78,7 +78,7 @@ public class EnemyBehaviourScript : MonoBehaviour
         enemyAnimator.SetTrigger("Death");
         // Stops enemy from moving and attacking when dead
         enemyRB.velocity = Vector2.zero;
-        GetComponent<EnemyAttackScript>().enabled = false;
+        EnemyPatrol = false;
         // Destroys enemy object
         Destroy(gameObject, 1.2f);
     }

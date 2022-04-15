@@ -13,7 +13,8 @@ public class EnemyAttackScript : MonoBehaviour
 
     // Variables
     [SerializeField] float range = 4;
-    public float cooldownTimer = 1.5f;
+    public float cooldownTimer = 0f;
+    public float attackRate = 1.5f;
     float distanceToPlayer;
     public bool canAttack = true;
 
@@ -40,7 +41,7 @@ public class EnemyAttackScript : MonoBehaviour
                 // Stop enemy from moving
                 enemyScript.EnemyPatrol = false;        
                 // Call attack method
-                StartCoroutine(Attack());
+                Attack();
             }
         }
         else
@@ -50,15 +51,17 @@ public class EnemyAttackScript : MonoBehaviour
         }
     }
 
-    // IEnumerator Enemy Attack Method
-    IEnumerator Attack()
+    // Enemy Attack Method
+    void Attack()
     {
-        canAttack = false;
-        yield return new WaitForSeconds(cooldownTimer);
-        enemyScript.enemyRB.velocity = Vector2.zero;
-        enemyAnimator.SetTrigger("Attack");
-        Instantiate(rockProjectile, throwPosition.position, throwPosition.rotation);
-        yield return new WaitForSeconds(cooldownTimer);
-        canAttack = true;
+        if(Time.time >= cooldownTimer)
+        {
+            canAttack = false;
+            enemyScript.enemyRB.velocity = Vector2.zero;
+            enemyAnimator.SetTrigger("Attack");
+            Instantiate(rockProjectile, throwPosition.position, throwPosition.rotation);
+            cooldownTimer = Time.time + attackRate;
+            canAttack = true;
+        }
     }
 }
