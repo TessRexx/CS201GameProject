@@ -12,6 +12,13 @@ public class MainMenuScript : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    // Replay Game Method
+    public void ReplayGame()
+    {
+        // Loads game scene when Play Again is clicked at end of level
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
     // Quit Game Method
     public void QuitGame()
     {
